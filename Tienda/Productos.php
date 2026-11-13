@@ -248,6 +248,14 @@ $total_articulos = isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito'])
     .btn-buy:hover {
       background-color: #257bc4;
     }
+    footer {
+      font-family: Arial, sans-serif;
+      background-color: #2c3e50; 
+      margin: 0; 
+      padding: 20px; 
+      text-align: center; 
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -905,4 +913,7 @@ $total_articulos = isset($_SESSION['carrito']) ? array_sum($_SESSION['carrito'])
   </main>
 
 </body>
+<footer>
+  <p> Armando Eliseo Alvarez Carreon 5ºI 0482 </p>
+</footer>
 </html>

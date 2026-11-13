@@ -67,131 +67,277 @@ $conexion->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Coppel</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f6fa;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    body {
+      background-color: #f4f6f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+    header {
+      background-color: #2b3e50;
+      padding: 12px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        header p {
-            margin: 10px 0 0 0;
-            opacity: 0.8;
-            font-size: 16px;
-        }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
 
-        .main-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
+    .brand {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      text-decoration: none;
+    }
 
-        .cards-grid {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 1200px;
-            width: 100%;
-        }
+    nav {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 320px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            box-sizing: border-box;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    nav a {
+      color: #e0e6ed;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
+    nav a:hover {
+      color: #3197e8;
+    }
 
-        .card h3 {
-            color: #2c3e50;
-            margin-top: 0;
-            font-size: 22px;
-            border-bottom: 2px solid #f5f6fa;
-            padding-bottom: 15px;
-        }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-        .card p {
-            color: #7f8c8d;
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 15px 0 25px 0;
-            flex-grow: 1;
-        }
+    .search-box {
+      display: flex;
+      align-items: center;
+    }
 
-        .btn {
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            padding: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 4px;
-            display: block;
-            transition: background 0.2s;
-        }
+    .search-box input {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+      font-size: 13px;
+      width: 180px;
+    }
 
-        .btn:hover {
-            background: #2980b9;
-        }
+    .search-box button {
+      padding: 8px 12px;
+      border: none;
+      background-color: #3197e8;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-size: 13px;
+    }
 
-        .btn-seguimiento {
-            background: #e67e22;
-        }
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-        .btn-seguimiento:hover {
-            background: #d35400;
-        }
+    .btn-header {
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-            font-size: 13px;
-            background-color: #ffffff;
-            border-top: 1px solid #ddd;
-        }
-    </style>
+    .btn-cart {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+
+    .btn-cart:hover {
+      background-color: #218838;
+    }
+
+    .btn-login {
+      background-color: #3197e8;
+      color: #ffffff;
+    }
+
+    .btn-login:hover {
+      background-color: #257bc4;
+    }
+
+    .btn-register {
+      background-color: transparent;
+      color: #ffffff;
+      border: 1px solid #3197e8;
+    }
+
+    .btn-register:hover {
+      background-color: #3197e8;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .section-block {
+      margin-bottom: 45px;
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      color: #2b3e50;
+      margin-bottom: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #3197e8;
+      padding-bottom: 8px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 160px;
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .product-info {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-category {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #3197e8;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      color: #2b3e50;
+      font-weight: bold;
+      margin-bottom: 10px;
+      min-height: 36px;
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 17px;
+      color: #d9534f;
+      font-weight: bold;
+      margin-top: auto;
+      margin-bottom: 12px;
+    }
+
+    .btn-buy {
+      width: 100%;
+      padding: 9px 0;
+      background-color: #3197e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-buy:hover {
+      background-color: #257bc4;
+    }
+    footer {
+      font-family: Arial, sans-serif;
+      background-color: #2c3e50; 
+      margin: 0; 
+      padding: 20px; 
+      text-align: center; 
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Coppel</h1>
-    </header>
+  <header>
+    <div class="header-left">
+      <a href="Productos.php" class="brand">Coppel</a>
+    </div>
+
+    <div class="header-right">
+      <div class="search-box">
+        <input type="text" placeholder="Buscar productos...">
+        <button type="button">Buscar</button>
+      </div>
+
+      <div class="auth-buttons">
+        <!-- Botón del Carrito con contador -->
+         <a href="carrito.php" class="btn-header btn-cart">Carrito</a>
+        <a href="login.php" class="btn-header btn-login">Iniciar sesión</a>
+        <a href="registro.php" class="btn-header btn-register">Registrar</a>
+      </div>
+    </div>
+  </header>
 
     <div class="main-container">
         <div class="cards-grid">
@@ -217,5 +363,7 @@ $conexion->close();
 
 
 </body>
-
+<footer>
+  <p> Armando Eliseo Alvarez Carreon 5ºI 0482 </p>
+</footer>
 </html>
